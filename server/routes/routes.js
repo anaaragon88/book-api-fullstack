@@ -7,10 +7,11 @@ import {
   getOneBook,
 } from "../controllers/bookController.js";
 import { validateCreateBook } from "../validators/bookValidator.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const bookrouter = express.Router();
 
-bookrouter.get("/", getAllBooks);
+bookrouter.get("/", authMiddleware, getAllBooks);
 bookrouter.get("/:id", getOneBook);
 bookrouter.post("/", validateCreateBook, createBook);
 bookrouter.delete("/:id", deleteBook);
