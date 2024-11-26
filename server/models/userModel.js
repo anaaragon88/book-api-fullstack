@@ -21,6 +21,11 @@ const userModel = connectionDB.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    role: {
+      type: DataTypes.ENUM("user", "admin"), // Define los roles posibles
+      allowNull: false,
+      defaultValue: "user", // Asigna "user" como rol predeterminado
+    },
   },
   {
     tableName: "users",

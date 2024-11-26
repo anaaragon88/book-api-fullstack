@@ -8,10 +8,11 @@ import {
 } from "../controllers/bookController.js";
 import { validateCreateBook } from "../validators/bookValidator.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
+import { checkRol } from "../middlewares/rolMiddleware.js";
 
 const bookrouter = express.Router();
 
-bookrouter.get("/", authMiddleware, getAllBooks);
+bookrouter.get("/", authMiddleware, checkRol(["admin"]), getAllBooks);
 bookrouter.get("/:id", getOneBook);
 bookrouter.post("/", validateCreateBook, createBook);
 bookrouter.delete("/:id", deleteBook);
